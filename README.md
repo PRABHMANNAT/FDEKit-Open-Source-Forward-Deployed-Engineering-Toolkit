@@ -121,7 +121,8 @@ detection is heuristic; dynamic declarations may not be recognized.
 PASS and SKIPPED findings deduct zero. Some advisory checks have no deduction.
 The score is deterministic for the same files, configuration, Git state and tool version.
 It is a checklist score, not a probability of deployment success. A score of 100 is not
-a security guarantee. See [the complete scoring table](docs/SCORING.md).
+a security guarantee. See the [scoring and interpretation guide](docs/SCORING.md) for
+finding semantics, evidence-first review, limitations, and the complete deduction table.
 
 ## Configuration and privacy
 
