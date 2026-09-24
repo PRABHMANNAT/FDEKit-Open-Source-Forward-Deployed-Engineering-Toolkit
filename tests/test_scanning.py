@@ -182,3 +182,37 @@ def test_declared_package_manager(tmp_path):
 def test_pytest_configuration_is_test_indicator(tmp_path):
     (tmp_path / "pyproject.toml").write_text("[tool.pytest.ini_options]\ntestpaths=['tests']")
     assert by_id(scan(tmp_path), "testing.present").status == Status.PASS
+
+
+def test_javascript_literal_bracket_environment_access(tmp_path):
+    (tmp_path / "config.ts").write_text(
+        """
+const api = process.env["API_KEY"];
+const database = process.env['DATABASE_URL'];
+const viteApi = import.meta.env["VITE_API_URL"];
+const backend = import.meta.env['VITE_BACKEND_URL'];
+const existingDotAccess = process.env.EXISTING_TOKEN;
+"""
+    )
+
+    result = scan(tmp_path)
+
+    assert by_id(result, "configuration.env").evidence == [
+        "Undocumented variable: API_KEY",
+        "Undocumented variable: DATABASE_URL",
+        "Undocumented variable: EXISTING_TOKEN",
+        "Undocumented variable: VITE_API_URL",
+        "Undocumented variable: VITE_BACKEND_URL",
+    ]
+
+
+def test_javascript_dynamic_bracket_environment_access_is_ignored(tmp_path):
+    (tmp_path / "config.js").write_text(
+        """
+const first = process.env[key];
+const second = process.env[getName()];
+const third = import.meta.env[variable];
+"""
+    )
+
+    assert by_id(scan(tmp_path), "configuration.env").status == Status.SKIPPED
