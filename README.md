@@ -34,6 +34,10 @@ fdekit --help
 fdekit doctor
 ```
 
+FDEKit also provides shell completion for commands and options. See the
+[shell completion guide](docs/SHELL_COMPLETION.md) for temporary activation, persistent
+installation, removal, and verified shell-specific behavior.
+
 ## Quick start and demo
 
 ```sh
