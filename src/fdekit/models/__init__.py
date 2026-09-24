@@ -1,11 +1,11 @@
 """Versioned report and configuration contracts."""
 
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field
 
 
-class Status(str, Enum):
+class Status(StrEnum):
     PASS = "PASS"
     INFO = "INFO"
     WARNING = "WARNING"
@@ -13,7 +13,7 @@ class Status(str, Enum):
     SKIPPED = "SKIPPED"
 
 
-class Category(str, Enum):
+class Category(StrEnum):
     RUNTIME = "runtime"
     DEPENDENCIES = "dependencies"
     CONFIGURATION = "configuration"
@@ -56,11 +56,13 @@ class Report(BaseModel):
     checks: list[Check]
     score: int = Field(ge=0, le=100)
     scoring_model: str = "v1: max(0, 100 - sum(score_impact)); see docs/SCORING.md"
-    limitations: list[str] = Field(default_factory=lambda: [
-        "Static heuristics only; presence does not prove correct or working configuration.",
-        "No network calls, dependency installation, project execution, or Git history scan.",
-        "No security guarantee. Excluded, binary, oversized and unreadable files are not inspected.",
-    ])
+    limitations: list[str] = Field(
+        default_factory=lambda: [
+            "Static heuristics only; presence does not prove correct or working configuration.",
+            "No network calls, dependency installation, project execution, or Git history scan.",
+            "No security guarantee. Exclusions and read limits can hide risks.",
+        ]
+    )
 
 
 class Config(BaseModel):
@@ -69,5 +71,6 @@ class Config(BaseModel):
     exclude: list[str] = Field(default_factory=lambda: ["tests/fixtures", "examples"])
     max_file_bytes: int = Field(default=262144, ge=1024, le=2097152)
     max_files: int = Field(default=10000, ge=1, le=100000)
+    max_total_bytes: int = Field(default=16777216, ge=1024, le=134217728)
     required_env: list[str] = Field(default_factory=list)
     min_score: int = Field(default=70, ge=0, le=100)

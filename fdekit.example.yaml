@@ -5,6 +5,7 @@ exclude:
   - examples
 max_file_bytes: 262144
 max_files: 10000
+max_total_bytes: 16777216
 # List variable names only. Never place real credentials in this file.
 required_env: []
 min_score: 70
