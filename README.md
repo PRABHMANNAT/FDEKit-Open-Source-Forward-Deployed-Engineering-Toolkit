@@ -69,6 +69,9 @@ WARNING: CI configuration
   Add CI that tests and builds the project.
 ```
 
+Read the [generated example Markdown report](docs/SAMPLE_REPORT.md) or
+[JSON evidence](docs/SAMPLE_REPORT.json).
+
 `scan` prints evidence without writing files. `report` writes `.fdekit/report.md` and
 `.fdekit/report.json` under the scanned directory. `init` refuses to overwrite configuration.
 `check` exits 1 for any FAIL finding or a score below the threshold. Input/output errors

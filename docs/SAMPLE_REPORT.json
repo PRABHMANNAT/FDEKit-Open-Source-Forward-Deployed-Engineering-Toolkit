@@ -1,0 +1,254 @@
+{
+  "schema_version": "1.0",
+  "tool_version": "0.1.0",
+  "project": "fastapi-service",
+  "stack": {
+    "languages": [
+      "Python"
+    ],
+    "frameworks": [
+      "FastAPI"
+    ],
+    "package_managers": [
+      "pip"
+    ],
+    "runtimes": {
+      "Python pin": "3.11.9"
+    },
+    "docker": [
+      "Dockerfile"
+    ],
+    "ci": [],
+    "deployment": [
+      "Dockerfile"
+    ]
+  },
+  "checks": [
+    {
+      "id": "project.stack",
+      "name": "Recognized project stack",
+      "category": "dependencies",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Language and manifest indicators only.",
+      "evidence": [
+        "Python"
+      ],
+      "recommendation": "Add a supported project manifest or inspect the stack manually.",
+      "score_impact": 0
+    },
+    {
+      "id": "dependencies.manifests",
+      "name": "Manifest syntax",
+      "category": "dependencies",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Parse supported root manifests without executing code.",
+      "evidence": [],
+      "recommendation": "Repair invalid manifests.",
+      "score_impact": 0
+    },
+    {
+      "id": "runtime.pinned",
+      "name": "Runtime versions pinned",
+      "category": "runtime",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Exact x.y.z versions in .python-version, .nvmrc or .node-version.",
+      "evidence": [
+        "Python pin"
+      ],
+      "recommendation": "Pin each detected runtime to a tested patch version.",
+      "score_impact": 0
+    },
+    {
+      "id": "dependencies.locked",
+      "name": "Dependency reproducibility indicators",
+      "category": "dependencies",
+      "status": "WARNING",
+      "severity": "medium",
+      "description": "Lockfile presence or simple exact requirements; integrity not verified.",
+      "evidence": [],
+      "recommendation": "Commit a lockfile and verify a clean reproducible install.",
+      "score_impact": 8
+    },
+    {
+      "id": "testing.present",
+      "name": "Test indicators",
+      "category": "testing",
+      "status": "WARNING",
+      "severity": "medium",
+      "description": "Test command, files or pytest configuration detected; tests are not executed.",
+      "evidence": [],
+      "recommendation": "Add meaningful automated tests and run them in CI.",
+      "score_impact": 10
+    },
+    {
+      "id": "ci.present",
+      "name": "CI configuration",
+      "category": "ci",
+      "status": "WARNING",
+      "severity": "medium",
+      "description": "Known CI configuration files exist; workflow results are not checked.",
+      "evidence": [],
+      "recommendation": "Add CI that tests and builds the project.",
+      "score_impact": 8
+    },
+    {
+      "id": "deployment.config",
+      "name": "Deployment configuration",
+      "category": "deployment",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Deployment file indicators at the project root.",
+      "evidence": [
+        "Dockerfile"
+      ],
+      "recommendation": "Document deployment and add appropriate provider or container configuration.",
+      "score_impact": 0
+    },
+    {
+      "id": "deployment.docker",
+      "name": "Docker indicators",
+      "category": "deployment",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Docker is optional; no score deduction when absent.",
+      "evidence": [
+        "Dockerfile"
+      ],
+      "recommendation": "Consider containers if required by your target environment.",
+      "score_impact": 0
+    },
+    {
+      "id": "observability.health",
+      "name": "Health-check indicator",
+      "category": "observability",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Text heuristic only; no endpoint is called.",
+      "evidence": [],
+      "recommendation": "For services, implement and verify a health endpoint; libraries may omit it.",
+      "score_impact": 0
+    },
+    {
+      "id": "configuration.env",
+      "name": "Environment variable documentation",
+      "category": "configuration",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Compare static references and required_env with example keys.",
+      "evidence": [],
+      "recommendation": "Document required variables using safe placeholders in .env.example.",
+      "score_impact": 0
+    },
+    {
+      "id": "integration.configuration",
+      "name": "Integration configuration contract",
+      "category": "integration",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Only configuration names are checked; credentials and connectivity are unverified.",
+      "evidence": [
+        "SERVICE_API_KEY"
+      ],
+      "recommendation": "Validate auth, timeouts, retries and connectivity in the target environment.",
+      "score_impact": 0
+    },
+    {
+      "id": "security.secrets",
+      "name": "Credential-risk patterns",
+      "category": "security",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Heuristics over selected working-tree files; no history scan or security guarantee.",
+      "evidence": [],
+      "recommendation": "Review locally. Rotate exposed credentials and remove them from tracked content.",
+      "score_impact": 0
+    },
+    {
+      "id": "security.tracked-env",
+      "name": "Environment files tracked by Git",
+      "category": "security",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Inspect the current Git index, including ignored tracked files.",
+      "evidence": [],
+      "recommendation": "Untrack private environment files and rotate any exposed credentials.",
+      "score_impact": 0
+    },
+    {
+      "id": "security.gitignore",
+      "name": "Private environment ignore rule",
+      "category": "security",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Check whether the root .env path is ignored; other filenames need review.",
+      "evidence": [],
+      "recommendation": "Ignore .env and private variants; explicitly allow sanitized examples.",
+      "score_impact": 0
+    },
+    {
+      "id": "security.debug",
+      "name": "Debug configuration risk",
+      "category": "security",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Detect literal DEBUG=true or FLASK_DEBUG=1 assignments.",
+      "evidence": [],
+      "recommendation": "Disable debug mode in production configuration.",
+      "score_impact": 0
+    },
+    {
+      "id": "repository.git",
+      "name": "Git worktree",
+      "category": "repository",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Read-only local Git inspection; remote access is not tested.",
+      "evidence": [],
+      "recommendation": "Initialize Git or run from a checked-out repository.",
+      "score_impact": 0
+    },
+    {
+      "id": "repository.commit",
+      "name": "Commit history exists",
+      "category": "repository",
+      "status": "PASS",
+      "severity": "none",
+      "description": "A local HEAD commit exists; commit content and history are not audited.",
+      "evidence": [],
+      "recommendation": "Commit a reviewed baseline before deployment.",
+      "score_impact": 0
+    },
+    {
+      "id": "repository.clean",
+      "name": "Working tree state",
+      "category": "repository",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Uncommitted changes can affect reproducibility.",
+      "evidence": [],
+      "recommendation": "Review and commit intended deployment changes.",
+      "score_impact": 0
+    },
+    {
+      "id": "scan.complete",
+      "name": "Inspection completeness",
+      "category": "configuration",
+      "status": "PASS",
+      "severity": "none",
+      "description": "Report file limits and filesystem access failures.",
+      "evidence": [],
+      "recommendation": "Review skipped paths or adjust limits and rescan.",
+      "score_impact": 0
+    }
+  ],
+  "score": 74,
+  "scoring_model": "v1: max(0, 100 - sum(score_impact)); see docs/SCORING.md",
+  "limitations": [
+    "Static heuristics only; presence does not prove correct or working configuration.",
+    "No network calls, dependency installation, project execution, or Git history scan.",
+    "No security guarantee. Exclusions and read limits can hide risks."
+  ]
+}
