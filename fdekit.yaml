@@ -1,0 +1,11 @@
+schema_version: 1
+# Our tests deliberately contain synthetic credential/environment patterns.
+# Scan tests explicitly when investigating the detector itself.
+exclude:
+  - tests
+  - examples
+max_file_bytes: 262144
+max_files: 10000
+max_total_bytes: 16777216
+required_env: []
+min_score: 70

@@ -1,0 +1,22 @@
+name: New stack or framework support
+description: Propose deterministic detection for a stack.
+body:
+  - type: input
+    id: stack
+    attributes:
+      label: Stack and supported versions
+    validations:
+      required: true
+  - type: textarea
+    id: indicators
+    attributes:
+      label: Files or structured configuration that identify this stack
+    validations:
+      required: true
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Sanitized minimal fixture and expected findings
+      description: Include no credentials or customer code.
+    validations:
+      required: true
