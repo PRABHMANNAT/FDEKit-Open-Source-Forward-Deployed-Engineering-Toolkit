@@ -1,0 +1,10 @@
+schema_version: 1
+# Paths relative to the scan root. These directories are pruned before reading.
+exclude:
+  - tests/fixtures
+  - examples
+max_file_bytes: 262144
+max_files: 10000
+# List variable names only. Never place real credentials in this file.
+required_env: []
+min_score: 70
