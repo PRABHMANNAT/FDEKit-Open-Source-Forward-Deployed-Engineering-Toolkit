@@ -8,6 +8,8 @@ from fdekit.utils.files import Inventory
 ENV_ASSIGNMENT = re.compile(r"(?m)^\s*(?:export\s+)?([A-Z][A-Z0-9_]*)\s*=")
 ENV_REFERENCE = re.compile(
     r"process\.env\.([A-Z][A-Z0-9_]*)|"
+    r"(?:process\.env|import\.meta\.env)\[\s*(?:"
+    r'"([A-Z][A-Z0-9_]*)"|\'([A-Z][A-Z0-9_]*)\')\s*\]|'
     r"(?:os\.getenv|os\.environ\.get)\(\s*[\"']([A-Z][A-Z0-9_]*)[\"']|"
     r"os\.environ\[\s*[\"']([A-Z][A-Z0-9_]*)[\"']"
 )
